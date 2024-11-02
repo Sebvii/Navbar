@@ -1,6 +1,8 @@
 package com.example.navbar;
+
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,42 +20,45 @@ public class MainActivity extends AppCompatActivity {
 
         // Set default fragment
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new HomeFragment())
+                    .commit();
         }
 
+        // Set navigation item selection listener
         bottomNavigationView.setOnItemSelectedListener(this::onNavigationItemSelected);
-
     }
 
-    private boolean onNavigationItemSelected(MenuItem item) {
-        Fragment selectedFragment;
+    private boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Fragment selectedFragment = null;
 
-        switch (item.getItemId()) {
-            case R.id.nav_home:
-                selectedFragment = new HomeFragment();
-                break;
-            case R.id.nav_challenges:
-                selectedFragment = new ChallengesFragment();
-                break;
-            case R.id.nav_add:
-                selectedFragment = new AddFragment();
-                break;
-            case R.id.nav_rewards:
-                selectedFragment = new RewardsFragment();
-                break;
-            case R.id.nav_profile:
-                selectedFragment = new ProfileFragment();
-                break;
-            default:
-                return false;  // If item ID does not match any case
+        if (item.getItemId() == R.id.nav_home) {
+            selectedFragment = new HomeFragment();
+        } else if (item.getItemId() == R.id.nav_challenges) {
+            selectedFragment = new ChallengesFragment();
+        } else if (item.getItemId() == R.id.nav_add) {
+            selectedFragment = new AddFragment();
+        } else if (item.getItemId() == R.id.nav_rewards) {
+            selectedFragment = new RewardsFragment();
+        } else if (item.getItemId() == R.id.nav_profile) {
+            selectedFragment = new ProfileFragment();
         }
 
-        // Begin a transaction and replace the container with the selected fragment
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, selectedFragment)
-                .commit();
+        if (selectedFragment != null) {
+            // Begin a transaction and replace the container with the selected fragment
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, selectedFragment)
+                    .commit();
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-        return true;  // Returning true to indicate that the item click is handled
+    public void onArrowClick(View view) {
+    }
+
+    public void onProfileImageClick(View view) {
     }
 }

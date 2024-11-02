@@ -1,13 +1,509 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Home Fragment"
-        android:textSize="24sp" />
-</LinearLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:background="#00000000"
+        tools:context=".MainActivity">
+
+        <!-- Profile Image and Greeting Texts -->
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_profile"
+            android:contentDescription="Profile"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="onProfileImageClick"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"/>
+
+        <TextView
+            android:id="@+id/greetingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="20dp"
+            android:text="Hello, Juan Dela Cruz"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/emissionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="4dp"
+            android:text="You have emitted 120 kg CO₂ this week"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/greetingText" />
+
+        <!-- Circular Progress Bar -->
+        <ProgressBar
+            android:id="@+id/circularProgressBar"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="24dp"
+            android:indeterminate="false"
+            android:max="200"
+            android:progress="120"
+            android:progressDrawable="@drawable/circular_progress_bar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/emissionText" />
+
+        <!-- CO2 Value and Labels in the Center of Progress Bar -->
+        <TextView
+            android:id="@+id/co2Value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="120"
+            android:textColor="#333333"
+            android:textSize="50sp"
+            app:layout_constraintBottom_toBottomOf="@id/circularProgressBar"
+            app:layout_constraintTop_toTopOf="@id/circularProgressBar"
+            app:layout_constraintStart_toStartOf="@id/circularProgressBar"
+            app:layout_constraintEnd_toEndOf="@id/circularProgressBar" />
+
+        <TextView
+            android:id="@+id/co2Label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/co2"
+            android:textColor="#333333"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/co2Value"
+            app:layout_constraintEnd_toEndOf="@id/circularProgressBar"
+            app:layout_constraintStart_toStartOf="@id/circularProgressBar" />
+
+        <TextView
+            android:id="@+id/co2DescriptionLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="So far this week"
+            android:textColor="#333333"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/co2Value"
+            app:layout_constraintEnd_toEndOf="@id/circularProgressBar"
+            app:layout_constraintStart_toStartOf="@id/circularProgressBar" />
+
+        <!-- Title for Breakdown Section -->
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Breakdown"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/circularProgressBar"
+            app:layout_constraintStart_toStartOf="parent" />
+        <LinearLayout
+            android:id="@+id/household_section"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <!-- Icons and Texts inside Household Section -->
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_household" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="8dp"
+                android:text="Household"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3,675 kg CO₂"
+                android:textColor="#000000" />
+
+            <ImageView
+                android:id="@+id/household_section_arrow"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:clickable="true"
+                android:contentDescription="More details"
+                android:focusable="true"
+                android:src="@drawable/right_arrow"
+                app:tint="#000000" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/waste_section"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/energy_section">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_transportation" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="8dp"
+                android:text="Waste"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4 kg CO₂"
+                android:textColor="#000000" />
+
+            <ImageView
+                android:id="@+id/waste_section_arrow"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:clickable="true"
+                android:contentDescription="More details"
+                android:focusable="true"
+                android:onClick="onArrowClick"
+                android:src="@drawable/right_arrow"
+                app:tint="#000000" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/transportation_section"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/food_section">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_transportation" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="8dp"
+                android:text="Transportation"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4 kg CO₂"
+                android:textColor="#000000" />
+
+            <ImageView
+                android:id="@+id/transportation_section_arrow"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:clickable="true"
+                android:contentDescription="More details"
+                android:focusable="true"
+                android:onClick="onArrowClick"
+                android:src="@drawable/right_arrow"
+                app:tint="#000000" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/food_section"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/household_section">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_food" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="8dp"
+                android:text="Food"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 kg CO₂"
+                android:textColor="#000000" />
+
+            <ImageView
+                android:id="@+id/food_section_arrow"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:clickable="true"
+                android:contentDescription="More details"
+                android:focusable="true"
+                android:onClick="onArrowClick"
+                android:src="@drawable/right_arrow"
+                app:tint="#000000" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/energy_section"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/transportation_section">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_energy" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="8dp"
+                android:text="Energy"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 kg CO₂"
+                android:textColor="#000000" />
+
+            <ImageView
+                android:id="@+id/energy_section_arrow"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:clickable="true"
+                android:contentDescription="More details"
+                android:focusable="true"
+                android:onClick="onArrowClick"
+                android:src="@drawable/right_arrow"
+                app:tint="#000000" />
+        </LinearLayout>
+
+        <!-- Existing Layout Code Above -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintTop_toBottomOf="@id/energy_section">
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/whatYouCanDoTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="What YOU can do"
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal" />
+
+            <!-- Action Options -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+                <!-- Option 1: Change the way you travel -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="8dp"
+                    android:background="@drawable/rounded_background">
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_bike" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Change the way you travel"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:layout_marginTop="8dp"
+                        android:textAlignment="center" />
+                </LinearLayout>
+
+                <!-- Option 2: Reduce energy use -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="8dp"
+                    android:background="@drawable/rounded_background"
+                    android:layout_marginStart="16dp">
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_energy_saver" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Reduce energy use"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:layout_marginTop="8dp"
+                        android:textAlignment="center" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Enterprises and Discounts Section -->
+            <TextView
+                android:id="@+id/enterprisesTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SUPPORT SUSTAINABILITY. CUT CARBON. GAIN REWARDS!"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="24dp"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enterprises and Discounts"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp"
+                android:layout_gravity="center_horizontal" />
+
+            <!-- Enterprises List -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+                <!-- Enterprise 1 -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_masugid_enterprise" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Masugid Enterprise"
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        android:layout_marginTop="8dp"
+                        android:textAlignment="center" />
+                </LinearLayout>
+
+                <!-- Enterprise 2 -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_wa_enterprise" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="WA Enterprise"
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        android:layout_marginTop="8dp"
+                        android:textAlignment="center" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Learn More Button -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Learn more"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"
+                android:clickable="true" />
+        </LinearLayout>
+
+
+        <!-- Household, Waste, Transportation, Food, and Energy sections here, like in your original layout -->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
