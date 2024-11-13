@@ -6,13 +6,8 @@
 
     <item
         android:id="@+id/nav_challenges"
-        android:icon="@drawable/ic_challenges"
-        android:title="Challenges" />
-
-    <item
-        android:id="@+id/nav_add"
-        android:icon="@drawable/ic_add"
-        android:title="" />
+        android:icon="@drawable/carbon1"
+        android:title="Footprint" />
 
     <item
         android:id="@+id/nav_rewards"

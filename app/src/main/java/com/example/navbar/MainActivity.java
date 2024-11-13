@@ -36,8 +36,6 @@ public class MainActivity extends AppCompatActivity {
             selectedFragment = new HomeFragment();
         } else if (item.getItemId() == R.id.nav_challenges) {
             selectedFragment = new ChallengesFragment();
-        } else if (item.getItemId() == R.id.nav_add) {
-            selectedFragment = new AddFragment();
         } else if (item.getItemId() == R.id.nav_rewards) {
             selectedFragment = new RewardsFragment();
         } else if (item.getItemId() == R.id.nav_profile) {
